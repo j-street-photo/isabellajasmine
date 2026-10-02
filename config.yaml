@@ -2,9 +2,7 @@ baseURL: "https://isabellajasmine.com/"
 languageCode: "en-us"
 title: "Isabella Jasmine"
 
-module:
-  imports:
-    - path: github.com/nicokaiser/hugo-theme-gallery
+theme: "hugo-theme-gallery"
 
 markup:
   goldmark:
