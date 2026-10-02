@@ -1,0 +1,30 @@
+baseURL: "https://isabellajasmine.com/"
+languageCode: "en-us"
+title: "Isabella Jasmine"
+
+module:
+  imports:
+    - path: github.com/nicokaiser/hugo-theme-gallery
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+menu:
+  main:
+    - name: "Painting"
+      url: "/painting/"
+      weight: 1
+    - name: "Sculpture"
+      url: "/sculpture/"
+      weight: 2
+    - name: "Architectural and Landscape"
+      url: "/architectural_and_landscape/"
+      weight: 3
+      - name: "Other"
+      url: "/other/"
+      weight: 4
+
+params:
+  description: "Bella's Portfolio"
