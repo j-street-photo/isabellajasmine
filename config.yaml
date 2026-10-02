@@ -22,7 +22,7 @@ menu:
     - name: "Architectural and Landscape"
       url: "/architectural_and_landscape/"
       weight: 3
-      - name: "Other"
+    - name: "Other"
       url: "/other/"
       weight: 4
 
