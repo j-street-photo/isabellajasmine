@@ -5,4 +5,5 @@ params:
   private: true
   sort_by: "Date"
   sort_order: "desc"
+  category: "sculpture"
 ---
