@@ -1,6 +1,6 @@
 <section class="gallery">
   {{ $cloudName := "xel8gnh2" }}
-  {{ $slug := .Section }}
+  {{ $slug := .Params.category }}
   {{ $images := index .Site.Data $slug | default slice }}
   {{ warnf "DEBUG gallery.html: slug=%q found=%d" $slug (len $images) }}
   <div id="gallery" style="visibility: hidden; height: 1px; overflow: hidden">
