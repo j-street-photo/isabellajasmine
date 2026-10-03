@@ -1,0 +1,24 @@
+<section class="gallery">
+  {{ $cloudName := "xel8gnh2" }}
+  {{ $slug := .Section }}
+  {{ $images := index hugo.Data $slug }}
+  {{ warnf "DEBUG gallery.html: slug=%q found=%d" $slug (len $images) }}
+  <div id="gallery" style="visibility: hidden; height: 1px; overflow: hidden">
+    {{ range $images }}
+      {{ $publicID := .public_id }}
+      {{ $format := .format }}
+      {{ $w := .width }}
+      {{ $h := .height }}
+      {{ $encodedID := replace $publicID " " "%20" }}
+      {{ $thumbURL := printf "https://res.cloudinary.com/%s/image/upload/c_fit,w_600,h_600,f_auto,q_auto/%s.%s" $cloudName $encodedID $format }}
+      {{ $fullURL := printf "https://res.cloudinary.com/%s/image/upload/c_fit,w_1600,h_1600,f_auto,q_auto/%s.%s" $cloudName $encodedID $format }}
+      {{ $name := path.Base $publicID }}
+      {{ $title := replace (replace $name "_" " ") "-" " " | title }}
+      <a class="gallery-item" href="{{ $fullURL }}" data-pswp-src="{{ $fullURL }}" data-pswp-width="{{ $w }}" data-pswp-height="{{ $h }}" data-pswp-target="{{ $name | urlize }}" title="{{ $title }}" itemscope itemtype="https://schema.org/ImageObject" style="aspect-ratio: {{ $w }} / {{ $h }}">
+        <figure style="background-color: #eee; aspect-ratio: {{ $w }} / {{ $h }}">
+          <img class="lazyload" width="{{ $w }}" height="{{ $h }}" data-src="{{ $thumbURL }}" alt="{{ $title }}" />
+        </figure>
+      </a>
+    {{ end }}
+  </div>
+</section>
