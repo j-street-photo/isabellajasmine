@@ -59,6 +59,9 @@ async function fetchFolder(folderName) {
     }
 
     const data = await res.json();
+    if (folderName === "Sculpture" && results.length === 0) {
+      console.log("RAW FIRST RESOURCE:", JSON.stringify(data.resources[0], null, 2));
+    }
     results.push(...(data.resources || []));
     nextCursor = data.next_cursor;
   } while (nextCursor);
