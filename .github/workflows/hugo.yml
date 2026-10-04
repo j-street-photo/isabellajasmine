@@ -44,6 +44,9 @@ jobs:
           CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
           CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
 
+      - name: Debug - show synced data
+        run: cat data/*.json
+
       - name: Build
         run: hugo --gc --minify
 
