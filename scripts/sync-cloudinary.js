@@ -77,12 +77,14 @@ function captureDate(resource) {
 }
 
 function toGalleryEntry(resource) {
+  const caption = resource.context && resource.context.custom && resource.context.custom.caption;
   return {
     public_id: resource.public_id,
     format: resource.format,
     width: resource.width,
     height: resource.height,
     date: captureDate(resource),
+    caption: caption || null,
   };
 }
 
