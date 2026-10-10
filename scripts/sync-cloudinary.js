@@ -1,8 +1,7 @@
 // scripts/sync-cloudinary.js
 //
-// Pulls all images from specific Cloudinary folders and writes one Hugo
-// data file per gallery (data/<slug>.json), sorted newest-first by
-// capture date (EXIF DateTimeOriginal when available, else upload time).
+// Pulls assets from Cloudinary and writes one Hugo data file per source
+// (data/<slug>.json), sorted newest-first.
 //
 // Requires env vars: CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET
 
@@ -18,23 +17,24 @@ if (!CLOUD_NAME || !API_KEY || !API_SECRET) {
   process.exit(1);
 }
 
-// Cloudinary folder name -> Hugo content/data slug
-const FOLDER_MAP = {
-  "Painting": "painting",
-  "Sculpture": "sculpture",
-  "Architectural and Landscape": "architectural_and_landscape",
-  "Other": "other",
-};
+// Cloudinary search expression -> Hugo data file name
+const SOURCES = [
+  { expression: 'folder="Painting"', slug: "painting" },
+  { expression: 'folder="Sculpture"', slug: "sculpture" },
+  { expression: 'folder="Architectural and Landscape"', slug: "architectural_and_landscape" },
+  { expression: 'folder="Other"', slug: "other" },
+  { expression: "tags=homepage", slug: "collection" },
+];
 
 const AUTH = Buffer.from(`${API_KEY}:${API_SECRET}`).toString("base64");
 
-async function fetchFolder(folderName) {
+async function fetchAssets(expression) {
   const results = [];
   let nextCursor = undefined;
 
   do {
     const body = {
-      expression: `folder="${folderName}"`,
+      expression: expression,
       sort_by: [{ created_at: "desc" }],
       max_results: 500,
       with_field: ["context", "image_metadata"],
@@ -55,7 +55,7 @@ async function fetchFolder(folderName) {
 
     if (!res.ok) {
       const text = await res.text();
-      throw new Error(`Cloudinary API error (${res.status}) for folder "${folderName}": ${text}`);
+      throw new Error(`Cloudinary API error (${res.status}) for "${expression}": ${text}`);
     }
 
     const data = await res.json();
@@ -93,9 +93,9 @@ async function main() {
   const outDir = path.join(__dirname, "..", "data");
   fs.mkdirSync(outDir, { recursive: true });
 
-  for (const [folderName, slug] of Object.entries(FOLDER_MAP)) {
-    console.log(`Fetching folder "${folderName}"...`);
-    const resources = await fetchFolder(folderName);
+  for (const { expression, slug } of SOURCES) {
+    console.log(`Fetching ${expression}...`);
+    const resources = await fetchAssets(expression);
 
     const entries = resources
       .map(toGalleryEntry)
