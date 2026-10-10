@@ -1,7 +1,7 @@
 /* custom.css */
 
 /* Wide screens: hide the hamburger, show the menu as a right-aligned column */
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   body {
     position: relative;
   }
