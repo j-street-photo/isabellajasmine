@@ -80,14 +80,15 @@ function captureDate(resource) {
 }
 
 function toGalleryEntry(resource) {
-  const caption = resource.context && resource.context.custom && resource.context.custom.caption;
+  const ctx = resource.context || {};
+  const caption = ctx.caption || (ctx.custom && ctx.custom.caption) || null;
   return {
     public_id: resource.public_id,
     format: resource.format,
     width: resource.width,
     height: resource.height,
     date: captureDate(resource),
-    caption: caption || null,
+    caption: caption,
   };
 }
 
