@@ -28,3 +28,7 @@
     padding: 0.5rem 0.75rem;
   }
 }
+/* Lightbox: hide every top-bar button except close (removes zoom and download) */
+.pswp__top-bar .pswp__button:not(.pswp__button--close) {
+  display: none !important;
+}
