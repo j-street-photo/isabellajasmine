@@ -13,13 +13,13 @@ menu:
   main:
     - name: "Painting"
       url: "/painting/"
-      weight: 1
+      weight: 3
     - name: "Sculpture"
       url: "/sculpture/"
       weight: 2
-    - name: "Architectural and Landscape"
+    - name: "Architectural & Landscape"
       url: "/architectural_and_landscape/"
-      weight: 3
+      weight: 1
     - name: "Other"
       url: "/other/"
       weight: 4
