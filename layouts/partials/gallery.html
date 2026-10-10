@@ -1,3 +1,4 @@
+{{ if .Params.category }}
 <section class="gallery">
   {{ $cloudName := "xel8gnh2" }}
   {{ $slug := .Params.category }}
@@ -23,3 +24,4 @@
     {{ end }}
   </div>
 </section>
+{{ end }}
