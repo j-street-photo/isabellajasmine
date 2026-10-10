@@ -23,6 +23,12 @@ menu:
     - name: "Other"
       url: "/other/"
       weight: 4
+    - name: "About Me"
+      url: "/about/"
+      weight: 5
+    - name: "Contact"
+      url: "/contact/"
+      weight: 6
 
 params:
   description: "Bella's Portfolio"
