@@ -81,3 +81,10 @@ form.contact-form button {
   max-width: 100%;
   max-height: 75vh;
 }
+
+/* Home page header margin to push image down */
+@media (min-width: 768px) {
+  body > header {
+    margin-bottom: 8rem;
+  }
+}
